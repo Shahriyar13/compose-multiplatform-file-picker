@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import java.net.URI
 
 plugins {
@@ -19,15 +18,15 @@ extra.apply {
 	set("isReleaseVersion", !(version as String).endsWith("SNAPSHOT"))
 }
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+    applyDefaultHierarchyTemplate()
 	explicitApi()
 
 	androidTarget {
 		publishLibraryVariants("release")
 	}
 	jvm {
+		jvmToolchain(17)
 		compilations.all {
 			kotlinOptions.jvmTarget = "17"
 		}
@@ -37,6 +36,7 @@ kotlin {
 		binaries.executable()
 	}
 	macosX64()
+	macosArm64()
 	listOf(
 		iosX64(),
 		iosArm64(),
@@ -76,9 +76,8 @@ kotlin {
 				api(compose.preview)
 				api(compose.material)
 
-				val lwjglVersion = "3.3.1"
 				listOf("lwjgl", "lwjgl-tinyfd").forEach { lwjglDep ->
-					implementation("org.lwjgl:${lwjglDep}:${lwjglVersion}")
+					implementation("org.lwjgl:${lwjglDep}:${libs.versions.lwjgl.get()}")
 					listOf(
 						"natives-windows",
 						"natives-windows-x86",
@@ -89,7 +88,7 @@ kotlin {
 						"natives-linux-arm64",
 						"natives-linux-arm32"
 					).forEach { native ->
-						runtimeOnly("org.lwjgl:${lwjglDep}:${lwjglVersion}:${native}")
+						runtimeOnly("org.lwjgl:${lwjglDep}:${libs.versions.lwjgl.get()}:${native}")
 					}
 				}
 			}
