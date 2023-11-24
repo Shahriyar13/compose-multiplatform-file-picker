@@ -135,8 +135,8 @@ kotlin {
 					url.set(repoUrl)
 					developers {
 						developer {
-							name.set("Adam Brown")
-							id.set("Wavesonics")
+							name.set("Shahriyar Aghajani")
+							id.set("Shahriyar13")
 						}
 					}
 					licenses {
@@ -146,9 +146,9 @@ kotlin {
 						}
 					}
 					scm {
-						connection.set("scm:git:git://github.com/Wavesonics/compose-multiplatform-file-picker.git")
-						developerConnection.set("scm:git:ssh://git@github.com/Wavesonics/compose-multiplatform-file-picker.git")
-						url.set("https://github.com/Wavesonics/compose-multiplatform-file-picker")
+						connection.set("scm:git:git://github.com/Shahriyar13/compose-multiplatform-file-picker.git")
+						developerConnection.set("scm:git:ssh://git@github.com/Shahriyar13/compose-multiplatform-file-picker.git")
+						url.set("https://github.com/Shahriyar13/compose-multiplatform-file-picker")
 					}
 				}
 			}
