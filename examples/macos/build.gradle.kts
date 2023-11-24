@@ -4,7 +4,16 @@ plugins {
 }
 
 kotlin {
+	applyDefaultHierarchyTemplate()
+
 	macosX64 {
+		binaries {
+			executable {
+				entryPoint = "main"
+			}
+		}
+	}
+	macosArm64 {
 		binaries {
 			executable {
 				entryPoint = "main"
@@ -13,7 +22,7 @@ kotlin {
 	}
 
 	sourceSets {
-		val macosX64Main by getting {
+		val macosMain by getting {
 			dependencies {
 				implementation(compose.ui)
 				implementation(compose.foundation)

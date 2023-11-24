@@ -1,14 +1,11 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-
 plugins {
 	kotlin("multiplatform")
 	kotlin("native.cocoapods")
 	alias(libs.plugins.kotlin.compose)
 }
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-	targetHierarchy.default()
+	applyDefaultHierarchyTemplate()
 
 	iosX64()
 	iosArm64()

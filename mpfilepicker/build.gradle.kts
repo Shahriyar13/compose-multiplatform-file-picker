@@ -35,8 +35,10 @@ kotlin {
 		browser()
 		binaries.executable()
 	}
+
 	macosX64()
 	macosArm64()
+
 	listOf(
 		iosX64(),
 		iosArm64(),
@@ -95,6 +97,15 @@ kotlin {
 		}
 		val jvmTest by getting
 		val jsMain by getting
+
+		val macosX64Main by getting
+		val macosArm64Main by getting
+
+		val macosMain by getting {
+			dependsOn(commonMain)
+			macosX64Main.dependsOn(this)
+			macosArm64Main.dependsOn(this)
+		}
 	}
 
 	val javadocJar by tasks.registering(Jar::class) {

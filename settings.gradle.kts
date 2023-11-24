@@ -14,6 +14,6 @@ include(
 	":examples:android",
 	":examples:jvm",
 	":examples:web",
-	":examples:macosX64",
+	":examples:macos",
 	":examples:ios",
 )
