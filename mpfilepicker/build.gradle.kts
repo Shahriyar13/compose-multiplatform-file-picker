@@ -25,9 +25,9 @@ kotlin {
 		publishLibraryVariants("release")
 	}
 	jvm {
-		jvmToolchain(11)
+		jvmToolchain(17)
 		compilations.all {
-			kotlinOptions.jvmTarget = "11"
+			kotlinOptions.jvmTarget = "17"
 		}
 	}
 	js(IR) {
@@ -150,7 +150,7 @@ android {
 		minSdk = libs.versions.android.min.sdk.get().toInt()
 	}
 	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_11
-		targetCompatibility = JavaVersion.VERSION_11
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
 	}
 }
