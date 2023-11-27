@@ -129,8 +129,8 @@ kotlin {
 				val snapshotRepo = URI("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 				url = if (extra["isReleaseVersion"] == true) releaseRepo else snapshotRepo
 				credentials {
-					username = System.getenv("OSSRH_USERNAME") ?: "Unknown user"
-					password = System.getenv("OSSRH_PASSWORD") ?: "Unknown password"
+					username = properties["ossrh.username"]?.toString() ?: "Unknown user"
+					password = properties["ossrh.password"]?.toString() ?: "Unknown password"
 				}
 			}
 		}
@@ -146,7 +146,7 @@ kotlin {
 					developers {
 						developer {
 							name.set("Shahriyar Aghajani")
-							id.set("Shahriyar13")
+							id.set("Shahriyar.a13@gmail.com")
 						}
 					}
 					licenses {
