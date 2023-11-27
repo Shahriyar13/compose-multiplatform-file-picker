@@ -10,7 +10,7 @@ plugins {
 
 val readableName = "Multiplatform File Picker + Multiple File Picker"
 val repoUrl = "https://github.com/Shahriyar13/compose-multiplatform-file-picker"
-group = "com.darkrockstudios"
+group = "app.duss"
 description = "A multiplatform compose widget for picking files"
 version = libs.versions.library.get()
 
@@ -134,52 +134,12 @@ kotlin {
 				}
 			}
 		}
-		publications {
-			publications.withType<MavenPublication> {
-				artifact(javadocJar.get())
-
-				pom {
-					name.set(readableName)
-					description.set(project.description)
-					inceptionYear.set("2023")
-					url.set(repoUrl)
-					developers {
-						developer {
-							name.set("Shahriyar Aghajani")
-							id.set("Shahriyar.a13@gmail.com")
-						}
-					}
-					licenses {
-						license {
-							name.set("MIT")
-							url.set("https://opensource.org/licenses/MIT")
-						}
-					}
-					scm {
-						connection.set("scm:git:git://github.com/Shahriyar13/compose-multiplatform-file-picker.git")
-						developerConnection.set("scm:git:ssh://git@github.com/Shahriyar13/compose-multiplatform-file-picker.git")
-						url.set("https://github.com/Shahriyar13/compose-multiplatform-file-picker")
-					}
-				}
-			}
-		}
 	}
 }
 
 tasks.withType<AbstractPublishToMaven>().configureEach {
 	val signingTasks = tasks.withType<Sign>()
 	mustRunAfter(signingTasks)
-}
-
-signing {
-	val signingKey: String? = System.getenv("SIGNING_KEY")
-	val signingPassword: String? = System.getenv("SIGNING_PASSWORD")
-	if (signingKey != null && signingPassword != null) {
-		useInMemoryPgpKeys(null, signingKey, signingPassword)
-		sign(publishing.publications)
-	} else {
-		println("No signing credentials provided. Skipping Signing.")
-	}
 }
 
 android {
