@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import java.net.URI
 
 plugins {
@@ -9,8 +8,8 @@ plugins {
 	id("signing")
 }
 
-val readableName = "Multiplatform File Picker"
-val repoUrl = "https://github.com/Wavesonics/compose-multiplatform-file-picker"
+val readableName = "Multiplatform File Picker + Multiple File Picker"
+val repoUrl = "https://github.com/Shahriyar13/compose-multiplatform-file-picker"
 group = "com.darkrockstudios"
 description = "A multiplatform compose widget for picking files"
 version = libs.versions.library.get()
@@ -19,24 +18,26 @@ extra.apply {
 	set("isReleaseVersion", !(version as String).endsWith("SNAPSHOT"))
 }
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
 	explicitApi()
 
 	androidTarget {
 		publishLibraryVariants("release")
 	}
 	jvm {
+		jvmToolchain(11)
 		compilations.all {
-			kotlinOptions.jvmTarget = "17"
+			kotlinOptions.jvmTarget = "11"
 		}
 	}
 	js(IR) {
 		browser()
 		binaries.executable()
 	}
+
 	macosX64()
+	macosArm64()
+
 	listOf(
 		iosX64(),
 		iosArm64(),
@@ -76,9 +77,8 @@ kotlin {
 				api(compose.preview)
 				api(compose.material)
 
-				val lwjglVersion = "3.3.1"
 				listOf("lwjgl", "lwjgl-tinyfd").forEach { lwjglDep ->
-					implementation("org.lwjgl:${lwjglDep}:${lwjglVersion}")
+					implementation("org.lwjgl:${lwjglDep}:${libs.versions.lwjgl.get()}")
 					listOf(
 						"natives-windows",
 						"natives-windows-x86",
@@ -89,13 +89,33 @@ kotlin {
 						"natives-linux-arm64",
 						"natives-linux-arm32"
 					).forEach { native ->
-						runtimeOnly("org.lwjgl:${lwjglDep}:${lwjglVersion}:${native}")
+						runtimeOnly("org.lwjgl:${lwjglDep}:${libs.versions.lwjgl.get()}:${native}")
 					}
 				}
 			}
 		}
 		val jvmTest by getting
 		val jsMain by getting
+
+		val macosX64Main by getting
+		val macosArm64Main by getting
+
+		val macosMain by creating {
+			dependsOn(commonMain)
+			macosX64Main.dependsOn(this)
+			macosArm64Main.dependsOn(this)
+		}
+
+		val iosX64Main by getting
+		val iosArm64Main by getting
+		val iosSimulatorArm64Main by getting
+
+		val iosMain by creating {
+			dependsOn(commonMain)
+			iosX64Main.dependsOn(this)
+			iosArm64Main.dependsOn(this)
+			iosSimulatorArm64Main.dependsOn(this)
+		}
 	}
 
 	val javadocJar by tasks.registering(Jar::class) {
@@ -125,8 +145,8 @@ kotlin {
 					url.set(repoUrl)
 					developers {
 						developer {
-							name.set("Adam Brown")
-							id.set("Wavesonics")
+							name.set("Shahriyar Aghajani")
+							id.set("Shahriyar13")
 						}
 					}
 					licenses {
@@ -136,9 +156,9 @@ kotlin {
 						}
 					}
 					scm {
-						connection.set("scm:git:git://github.com/Wavesonics/compose-multiplatform-file-picker.git")
-						developerConnection.set("scm:git:ssh://git@github.com/Wavesonics/compose-multiplatform-file-picker.git")
-						url.set("https://github.com/Wavesonics/compose-multiplatform-file-picker")
+						connection.set("scm:git:git://github.com/Shahriyar13/compose-multiplatform-file-picker.git")
+						developerConnection.set("scm:git:ssh://git@github.com/Shahriyar13/compose-multiplatform-file-picker.git")
+						url.set("https://github.com/Shahriyar13/compose-multiplatform-file-picker")
 					}
 				}
 			}
@@ -170,7 +190,7 @@ android {
 		minSdk = libs.versions.android.min.sdk.get().toInt()
 	}
 	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_17
-		targetCompatibility = JavaVersion.VERSION_17
+		sourceCompatibility = JavaVersion.VERSION_11
+		targetCompatibility = JavaVersion.VERSION_11
 	}
 }

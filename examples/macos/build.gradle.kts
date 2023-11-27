@@ -11,9 +11,21 @@ kotlin {
 			}
 		}
 	}
+	macosArm64 {
+		binaries {
+			executable {
+				entryPoint = "main"
+			}
+		}
+	}
 
 	sourceSets {
-		val macosX64Main by getting {
+		val macosX64Main by getting
+		val macosArm64Main by getting
+
+		val macosMain by creating {
+			macosX64Main.dependsOn(this)
+			macosArm64Main.dependsOn(this)
 			dependencies {
 				implementation(compose.ui)
 				implementation(compose.foundation)

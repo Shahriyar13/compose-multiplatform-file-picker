@@ -1,18 +1,25 @@
-# Compose Multiplatform File Picker
+# Enhanced Compose Multiplatform File Picker
 
-![MIT License](https://img.shields.io/github/license/Wavesonics/compose-multiplatform-file-picker) ![Latest Release](https://img.shields.io/github/v/release/Wavesonics/compose-multiplatform-file-picker?include_prereleases)
+![MIT License](https://img.shields.io/github/license/Shahriyar13/compose-multiplatform-file-picker) ![Latest Release](https://img.shields.io/github/v/release/Shahriyar13/compose-multiplatform-file-picker?include_prereleases)
 
-![badge-platform-windows] ![badge-platform-linux] ![badge-platform-macos] ![badge-platform-android] ![badge-platform-js] ![badge-platform-macosX64]
+This repository is a fork of the original [Compose Multiplatform File Picker](https://github.com/Wavesonics/compose-multiplatform-file-picker) project with additional features.
 
-![badge-kotlin]
+## Features Added
 
-A multiplatform compose widget for picking files with each platform's Native File Picker Dialog.
+- **Select Multiple Files:** Enables users to pick multiple files at once.
+- **getFileByteArray():** A new method to retrieve the byte array of the selected file.
 
 ## Include in your project:
 
 ```kts
-implementation("com.darkrockstudios:mpfilepicker:3.0.0")
+implementation("com.shahriyar13:compose-multiplatform-file-picker:3.1.0")
 ```
+
+![badge-platform-windows] ![badge-platform-linux] ![badge-platform-macos] ![badge-platform-android] ![badge-platform-js] ![badge-platform-macosX64] ![badge-platform-macosArm64]
+
+![badge-kotlin]
+
+A multiplatform compose widget for picking files with each platform's Native File Picker Dialog.
 
 ## How to use
 
@@ -55,6 +62,16 @@ DirectoryPicker(showDirPicker) { path ->
     // do something with path
 }
 ````
+
+### Acknowledgments
+
+The original project is developed by [Wavesonics](https://github.com/Wavesonics/compose-multiplatform-file-picker). We acknowledge and appreciate their work.
+
+### License
+
+This project is licensed under the MIT License.
+
+### [Original README](https://github.com/Wavesonics/compose-multiplatform-file-picker)
 
 On each supported platform, it will update the platform native file picker dialog. On desktop, it will fall back to the
 Swing file picker if the native one can't be used for some reason.
@@ -117,7 +134,7 @@ and enter the following:
 
 Use it to launch a simulator and run/debug the example iOS App,
 
-[badge-kotlin]: https://img.shields.io/badge/kotlin-1.8.20-blue.svg?logo=kotlin
+[badge-kotlin]: https://img.shields.io/badge/kotlin-1.9.20-blue.svg?logo=kotlin
 
 <!-- PLATFORMS -->
 
@@ -134,3 +151,5 @@ Use it to launch a simulator and run/debug the example iOS App,
 [badge-platform-js]: http://img.shields.io/badge/platform-js-34913c.svg?style=flat
 
 [badge-platform-macosX64]: http://img.shields.io/badge/platform-macosX64-34913c.svg?style=flat
+
+[badge-platform-macosArm64]: http://img.shields.io/badge/platform-macosArm64-34913c.svg?style=flat
