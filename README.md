@@ -38,9 +38,9 @@ FilePicker(show = showFilePicker, fileExtensions = fileType) { file ->
 var showFilePicker by remember { mutableStateOf(false) }
 
 val fileType = listOf("jpg", "png")
-MultipleFilePicker(show = showFilePicker, fileExtensions = fileType) { file ->
+MultipleFilePicker(show = showFilePicker, fileExtensions = fileType) { files ->
     showFilePicker = false
-    // do something with the file
+    // do something with the list of files
 }
 ````
 
